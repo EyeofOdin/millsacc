@@ -1,18 +1,20 @@
-// Smooth scrolling for navigation links
+// Gladde rol-effek vir navigasieskakels
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        if (this.getAttribute('href') !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
 
-// Navbar scroll effect
+// Navigasiebalk deursigtigheid op rol
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
@@ -24,177 +26,33 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Form submission handling
+// Kontakvorm indiening hanteerder
 document.querySelector('.contact-form form').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form data
-    const formData = new FormData(this);
     const name = this.querySelector('input[type="text"]').value;
     const email = this.querySelector('input[type="email"]').value;
     const phone = this.querySelector('input[type="tel"]').value;
     const service = this.querySelector('select').value;
-    const message = this.querySelector('textarea').value;
     
-    // Basic validation
     if (!name || !email || !phone || !service) {
-        alert('Please fill in all required fields.');
+        alert('Vul asseblief alle verpligte velde in.');
         return;
     }
     
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    
-    // Phone validation (South African format)
-    const phoneRegex = /^(\+27|0)[0-9]{9}$/;
-    if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
-        alert('Please enter a valid South African phone number.');
-        return;
-    }
-    
-    // Simulate form submission
     const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Securing Connection...';
+    submitBtn.textContent = 'Verbinding word beveilig...';
     submitBtn.disabled = true;
     
     setTimeout(() => {
-        alert('Thank you for your formal inquiry. A senior financial consultant from Mills Accountants will contact you securely within 24 hours to analyze your portfolio requirements.');
+        alert('Dankie vir u navraag. \'n Senior finansiële konsultant van Mills Accountants sal binne 24 uur veilig met u kontak maak.');
         this.reset();
-        submitBtn.textContent = originalText;
+        submitBtn.textContent = 'Dien Veilige Versoek In';
         submitBtn.disabled = false;
     }, 2000);
 });
 
-// Animate elements on scroll
-function animateOnScroll() {
-    const elements = document.querySelectorAll('.service-card, .feature-card, .testimonial-card');
-    
-    elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }
-    });
-}
-
-// Initialize animation styles
-document.addEventListener('DOMContentLoaded', function() {
-    const elements = document.querySelectorAll('.service-card, .feature-card, .testimonial-card');
-    
-    elements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-    
-    animateOnScroll();
-});
-
-// Trigger animations on scroll
-window.addEventListener('scroll', animateOnScroll);
-
-// Phone number formatting
-document.querySelector('input[type="tel"]').addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    
-    if (value.length > 0) {
-        if (value.startsWith('27')) {
-            value = '+' + value;
-        } else if (value.startsWith('0')) {
-            // Keep as is for local format
-        } else {
-            value = '0' + value;
-        }
-    }
-    
-    // Format as (011) 789-0123 for display
-    if (value.length >= 3) {
-        value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-    }
-    
-    e.target.value = value;
-});
-
-// Priority action button animation
-document.querySelector('.btn-emergency').addEventListener('click', function() {
-    this.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-        this.style.transform = 'scale(1)';
-    }, 150);
-});
-
-// Add loading state to scope alignment buttons
-document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Scroll to contact form
-        document.querySelector('#contact').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-        
-        // Highlight the contact form with corporate gold highlight
-        const contactForm = document.querySelector('.contact-form');
-        contactForm.style.border = '3px solid #d4af37';
-        
-        setTimeout(() => {
-            contactForm.style.border = 'none';
-        }, 3000);
-    });
-});
-
-// Mobile menu toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');
-    
-    if (window.innerWidth <= 768) {
-        const navMenu = document.querySelector('.nav-menu');
-        navMenu.style.display = 'none';
-        
-        // Create mobile menu button
-        const mobileMenuBtn = document.createElement('button');
-        mobileMenuBtn.innerHTML = '☰';
-        mobileMenuBtn.style.cssText = `
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #0f2537;
-            cursor: pointer;
-            padding: 10px;
-        `;
-        
-        navbar.querySelector('.container').appendChild(mobileMenuBtn);
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            if (navMenu.style.display === 'none') {
-                navMenu.style.display = 'flex';
-                navMenu.style.flexDirection = 'column';
-                navMenu.style.position = 'absolute';
-                navMenu.style.top = '100%';
-                navMenu.style.left = '0';
-                navMenu.style.right = '0';
-                navMenu.style.backgroundColor = 'white';
-                navMenu.style.padding = '20px';
-                navMenu.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-                this.innerHTML = '✕';
-            } else {
-                navMenu.style.display = 'none';
-                this.innerHTML = '☰';
-            }
-        });
-    }
-});
-
-// Add hover effects to cards
+// Kaart effekte vir interaksie
 document.querySelectorAll('.service-card, .feature-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-10px) scale(1.01)';
@@ -207,38 +65,4 @@ document.querySelectorAll('.service-card, .feature-card').forEach(card => {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const hero = document.querySelector('.hero');
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    
-    hero.style.transform = `translateY(${rate}px)`;
-});
-
-// Strategic branding pulse
-document.addEventListener('DOMContentLoaded', function() {
-    const logo = document.querySelector('.logo');
-    
-    setInterval(() => {
-        logo.style.transform = 'scale(1.03)';
-        setTimeout(() => {
-            logo.style.transform = 'scale(1)';
-        }, 300);
-    }, 10000);
-});
-
-// Log operations
-document.addEventListener('DOMContentLoaded', function() {
-    const jurisdictions = [
-        'Johannesburg Central',
-        'Extension 26',
-        'Blue Bush Corporate Link',
-        'Gauteng High Court Financial Nodes',
-        'National SARS Gateways'
-    ];
-    
-    console.log('Mills Accountants systems live across nodes: ' + jurisdictions.join(', '));
-});
-
-console.log('Mills Accountants enterprise platform active. 📊💼');
+console.log('Mills Accountants platform aktief met WhatsApp-integrasie. 📊💼');
