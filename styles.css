@@ -146,7 +146,7 @@ body {
     justify-content: center;
 }
 
-/* Knoppies */
+/* Buttons */
 .btn {
     display: inline-block;
     padding: 14px 30px;
@@ -293,7 +293,7 @@ body {
     line-height: 1.4;
 }
 
-/* About Section met CAlc.jpeg instellings */
+/* About Section with CAlc.jpeg styling */
 .about {
     padding: 80px 0;
     background: #f5f4f8;
@@ -380,7 +380,7 @@ body {
     text-decoration: underline;
 }
 
-/* Groot WhatsApp Area */
+/* Large WhatsApp Action Zone */
 .whatsapp-action-zone {
     text-align: center;
 }
@@ -441,7 +441,7 @@ body {
 .logo-img-footer {
     height: 50px;
     width: auto;
-    filter: brightness(0) invert(1); /* Verander swart logo na wit vir donker agtergrond */
+    filter: brightness(0) invert(1); /* Turns black logo into crisp white for dark backgrounds */
 }
 
 .footer-slogan {
