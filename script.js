@@ -19,7 +19,7 @@ window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 4px 20px rgba(61, 27, 125, 0.12)';
+        navbar.style.boxShadow = '0 4px 20 rgba(61, 27, 125, 0.12)';
     } else {
         navbar.style.backgroundColor = 'white';
         navbar.style.boxShadow = '0 2px 15px rgba(61, 27, 125, 0.08)';
@@ -29,7 +29,8 @@ window.addEventListener('scroll', function() {
 // Subtiele animasie vir diensstroke en kliëntekaarte
 document.querySelectorAll('.service-strip, .market-card').forEach(element => {
     element.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = '#fcfaff';
+        this.style.backgroundColor = '#fbfaff';
+        this.style.transition = 'background-color 0.3s ease';
     });
     
     element.addEventListener('mouseleave', function() {
