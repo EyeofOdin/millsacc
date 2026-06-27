@@ -438,10 +438,17 @@ body {
     margin-bottom: 25px;
 }
 
+.footer-logo-container {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
 .logo-img-footer {
     height: 50px;
     width: auto;
-    filter: brightness(0) invert(1); /* Turns black logo into crisp white for dark backgrounds */
+    display: block;
 }
 
 .footer-slogan {
